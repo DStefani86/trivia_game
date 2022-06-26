@@ -17,6 +17,7 @@ header {
 }
 .question-container{
 	margin: 10px;
+    display: none;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     text-align: center;
 	padding: 10px;
@@ -29,7 +30,8 @@ header {
 }
 
 .option-container {
-	display: flex;
+    display: none;
+	/* display: flex; */
 	justify-content: space-around;
 	margin: 10px;
 	padding: 10px;
