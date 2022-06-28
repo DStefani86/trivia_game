@@ -1,4 +1,14 @@
-var Questions = [ {
+var start = document.getElementById('start');
+var op1 = document.getElementById('op1');
+var op2 = document.getElementById('op2');
+var op3 = document.getElementById('op3');
+var op4 = document.getElementById('op4');
+var question = document.getElementById("question");
+var selected = "";
+var secondsLeft = 60;
+var questionNum = 0
+
+var myQuestions = [ {
     q: "What are the main differences between let and const?",
     a: [{ text: "let cannot be reassigned, const can be reassigned", isCorrect: false },
         { text: "let is functional scope, while const is block scope", isCorrect: false },
@@ -39,24 +49,16 @@ var Questions = [ {
     ]
 }]
 
-var start = document.getElementById('start');
-var op1 = document.getElementById('op1');
-var op2 = document.getElementById('op2');
-var op3 = document.getElementById('op3');
-var op4 = document.getElementById('op4');
 
-op1.innerText = Questions[0].a[0].text;
-op2.innerText = Questions[0].a[1].text;
-op3.innerText = Questions[0].a[2].text;
-op4.innerText = Questions[0].a[3].text;
-
+op1.innerText = Questions[0].answer[0].a;
+op2.innerText = Questions[0].answer[1].b;
+op3.innerText = Questions[0].answer[2].c;
+op4.innerText = Questions[0].answer[3].d;
 op1.value = Questions[0].a[0].isCorrect;
 op2.value = Questions[0].a[1].isCorrect;
 op3.value = Questions[0].a[2].isCorrect;
 op4.value = Questions[0].a[3].isCorrect;
 
-var selected = "";
-var secondsLeft = 60;
 
 
 function timer() {
@@ -70,40 +72,43 @@ function timer() {
 }
 
 start.addEventListener("click",function() {
+
     var questionContainer = document.querySelector(".question-container")
     var optionContainer = document.querySelector(".option-container")
     questionContainer.setAttribute("style", "display: flex") 
     optionContainer.setAttribute("style", "display: flex")
     start.setAttribute("style", "display: none")
     timer()
-    // quiz()
+    generateQuiz()
 })
-var question = document.getElementById("question");
 
 
 
-function quiz() {
-    for (let i=0; i = Questions[0].q; i++) {
-        var currentQues = Questions[0].q
-        question.innerText = currentQues
-    } }
 
+function generateQuiz(question) {
+
+    for (let i=0; i = myQuestions.length; i++) {
+        question.innerhtml = myQuestions[i].q
+    }
+      
+    
+}
 
 op1.addEventListener("click", function() {
    selected = op1.value;
-   if (selected == true) {
+   if (selected === true) {
     currentQues++   
        }
-   else if (selected == false) {
+   else if (selected === false) {
     currentQues++
-    secondsLeft = secondsLeft-15
-
+    secondsLeft = secondsLeft-10
    }
-})
+}),
 
 op2.addEventListener("click", function() { 
-    // console.log("hello")
+    
     selected = op2.value;
+    // console.log (selected)
     if (selected === true) {
         questionNum++
         console.log("hello")
@@ -112,7 +117,7 @@ op2.addEventListener("click", function() {
         questionNum++
         secondsLeft = secondsLeft-15
        }
-})
+}),
 op3.addEventListener("click", function() {   
     // console.log("hello") 
     selected = op3.value;
@@ -125,7 +130,7 @@ op3.addEventListener("click", function() {
         questionNum++
         secondsLeft = secondsLeft-15
        }
-})
+}),
 op4.addEventListener("click", function() {
     // console.log("hello")
     selected = op4.value;
@@ -137,4 +142,3 @@ op4.addEventListener("click", function() {
         secondsLeft = secondsLeft-15
        }
 })
-}
