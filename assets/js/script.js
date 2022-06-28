@@ -3,8 +3,8 @@ var op1 = document.getElementById('op1');
 var op2 = document.getElementById('op2');
 var op3 = document.getElementById('op3');
 var op4 = document.getElementById('op4');
-var question = document.getElementById("question");
-var selected = "";
+var question = document.getElementById("question-text");
+var choices = document.querySelector(".option-container")
 var secondsLeft = 60;
 var questionNum = 0
 
@@ -13,14 +13,16 @@ var myQuestions = [ {
     a1: "let cannot be reassigned, const can be reassigned", 
     a2: "let is functional scope, while const is block scope",
     a3: "let can be reassigned, const cannot be reassigned", 
-    a4: "let is block scope, while const is functional scope", 
+    a4: "let is block scope, while const is functional scope",
+    answer: "let can be reassigned, const cannot be reassigned"
 },
 {
     q: "For strict equality comparisons, we should use:",
     a1: "=>",
     a2: "=",
     a3: "==",
-    a4: "===", 
+    a4: "===",
+    answer: "===" 
     
 },
 {
@@ -28,15 +30,16 @@ var myQuestions = [ {
     a1: "Client",  
     a2: "Server",
     a3: "Both", 
-    a4: "Neither"
-    
+    a4: "Neither",
+    answer: "Both",
 },
 {
     q: "Which of the following type of variable is visible only within a function where it is defined?",
     a1: "global variable",
     a2: "local variable", 
     a3: "Both",
-    a4:  "Neither"
+    a4:  "Neither",
+    answer: "local variable",
     
 },
 {
@@ -44,15 +47,16 @@ var myQuestions = [ {
     a1: "shift()",
     a2: "reverse()", 
     a3: "slice()", 
-    a4: "some()"   
+    a4: "some()",
+    answer: "slice()",   
 }
 ]
 
 function timer() {
-    var timer = setInterval(function(){
-        document.getElementById('timer').innerHTML='00:'+secondsLeft;
+    var timer = setInterval(function() {
         secondsLeft--
-        if (secondsLeft < 0) {
+        document.getElementById("timer").innerHTML='00:'+secondsLeft;
+        if (secondsLeft === 0) {
             clearInterval(timer);
         }
     }, 1000);
@@ -66,66 +70,33 @@ startButton.addEventListener("click",function() {
     optionContainer.setAttribute("style", "display: flex")
     start.setAttribute("style", "display: none")
     timer()
-    generateQuiz()
+    showQuiz()
 })
 
 
-
-
-function generateQuiz(question) {
-
-    for (let i=0; i < myQuestions.length; i++) {
-        question.innerhtml = myQuestions[i].q;
-        op1.textContent = myQuestions[i].a[0].text
-        op2.textContent = myQuestions[i].a[1].text
-        op3.textContent = myQuestions[i].a[2].text
-        op4.textContent = myQuestions[i].a[3].text
-    }
-      
+function showQuiz() {
+    currentQuestion = Math.floor(Math.random() * myQuestions.length)
     
+        question.innerHTML = myQuestions[currentQuestion].q;
+        op1.innerHTML = myQuestions[currentQuestion].a1;
+        op2.innerHTML = myQuestions[currentQuestion].a2;
+        op3.innerHTML = myQuestions[currentQuestion].a3;
+        op4.innerHTML = myQuestions[currentQuestion].a4;
+       
 }
 
-op1.addEventListener("click", function() {
-   var selected = myQuestions[i];
-   if (selected === false) {
-    
-    secondsLeft = secondsLeft-10
-   }
-}),
+choices.addEventListener("click", function(apples) {
+    var selected = apples.target
+    var userChoice = apples.target.innerHTML
+    if (selected.matches("button")){
+        if (userChoice = myQuestions[currentQuestion].answer){
+            myQuestions.splice(currentQuestion,1);
+            showQuiz()
+        } else {
+            myQuestions.splice(currentQuestion,1);
+            secondsLeft = secondsLeft-15
+        }
 
-op2.addEventListener("click", function() { 
-    
-    selected = op2.value;
-    if (selected === true) {
-        questionNum++
-        console.log("hello")
-       }
-    if (selected === false) {
-        questionNum++
-        secondsLeft = secondsLeft-15
-       }
-}),
-op3.addEventListener("click", function() {   
-    // console.log("hello") 
-    selected = op3.value;
-    if (selected === true) {
-        console.log("hello")
-        questionNum++
-       }
-    if (selected === false) {
-        console.log("hello")
-        questionNum++
-        secondsLeft = secondsLeft-15
-       }
-}),
-op4.addEventListener("click", function() {
-    // console.log("hello")
-    selected = op4.value;
-    if (selected === true) {
-        questionNum++
-       }
-    if (selected === false) {
-        questionNum++
-        secondsLeft = secondsLeft-15
-       }
+    }
 })
+
