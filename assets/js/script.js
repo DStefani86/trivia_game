@@ -7,7 +7,6 @@ var question = document.getElementById("question-text");
 var choices = document.querySelector(".option-container")
 var secondsLeft = 60;
 var questionNum = 0
-
 var myQuestions = [ {
     q: "What are the main differences between let and const?",
     a1: "let cannot be reassigned, const can be reassigned", 
@@ -56,14 +55,14 @@ function timer() {
     var timer = setInterval(function() {
         secondsLeft--
         document.getElementById("timer").innerHTML='00:'+secondsLeft;
-        if (secondsLeft === 0) {
+        if (secondsLeft === 0 || myQuestions.length ===  0) {
             clearInterval(timer);
+            quizOver()
         }
     }, 1000);
 }
 
 startButton.addEventListener("click",function() {
-
     var questionContainer = document.querySelector(".question-container")
     var optionContainer = document.querySelector(".option-container")
     questionContainer.setAttribute("style", "display: flex") 
@@ -89,14 +88,25 @@ choices.addEventListener("click", function(apples) {
     var selected = apples.target
     var userChoice = apples.target.innerHTML
     if (selected.matches("button")){
-        if (userChoice = myQuestions[currentQuestion].answer){
+        if (userChoice === myQuestions[currentQuestion].answer) {
             myQuestions.splice(currentQuestion,1);
             showQuiz()
         } else {
             myQuestions.splice(currentQuestion,1);
-            secondsLeft = secondsLeft-15
+            secondsLeft = secondsLeft-15;
+            showQuiz()
         }
 
     }
 })
+
+function quizOver () {
+    var playerInitials = prompt ("You made the leaderboard!! Enter your initails")
+    var player = {
+        initials : playerInitials
+         : playerInitials + secondsLeft
+    }
+localStorage.setItem("score", JSON.stringify(player));
+window.location.reload
+}
 
