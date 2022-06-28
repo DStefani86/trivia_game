@@ -1,5 +1,4 @@
-const Questions = [ {
-    id: 0,
+var Questions = [ {
     q: "What are the main differences between let and const?",
     a: [{ text: "let cannot be reassigned, const can be reassigned", isCorrect: false },
         { text: "let is functional scope, while const is block scope", isCorrect: false },
@@ -8,7 +7,6 @@ const Questions = [ {
     ]
 },
 {
-    id: 1,
     q: "For strict equality comparisons, we should use:",
     a: [{ text: "=>", isCorrect: false,},
         { text: "=", isCorrect: false },
@@ -17,7 +15,6 @@ const Questions = [ {
     ]
 },
 {
-    id: 2,
     q: "JavaScript is a ___ -side programming language.",
     a: [{ text: "Client", isCorrect: false },
         { text: "Server", isCorrect: false },
@@ -26,7 +23,6 @@ const Questions = [ {
     ]
 },
 {
-    id: 3,
     q: "Which of the following type of variable is visible only within a function where it is defined?",
     a: [{ text: "global variable", isCorrect: false },
         { text: "local variable", isCorrect: true },
@@ -35,63 +31,109 @@ const Questions = [ {
     ]
 },
 {
-    id: 4,
     q: "Which of the following function of Array object extracts a section of an array and returns a new array?",
     a: [{ text: "shift()", isCorrect: false },
         { text: "reverse()", isCorrect: false },
         { text: "slice()", isCorrect: true },
         { text: "some()", isCorrect: false }
     ]
-}
-]
+}]
 
-const start = document.getElementById('start');
-const op1 = document.getElementById('op1');
-const op2 = document.getElementById('op2');
-const op3 = document.getElementById('op3');
-const op4 = document.getElementById('op4');
+var start = document.getElementById('start');
+var op1 = document.getElementById('op1');
+var op2 = document.getElementById('op2');
+var op3 = document.getElementById('op3');
+var op4 = document.getElementById('op4');
 
 op1.innerText = Questions[0].a[0].text;
-op2.innerText = Questions[1].a[1].text;
-op3.innerText = Questions[2].a[2].text;
-op4.innerText = Questions[3].a[3].text;
+op2.innerText = Questions[0].a[1].text;
+op3.innerText = Questions[0].a[2].text;
+op4.innerText = Questions[0].a[3].text;
 
 op1.value = Questions[0].a[0].isCorrect;
-op2.value = Questions[1].a[1].isCorrect;
-op3.value = Questions[2].a[2].isCorrect;
-op4.value = Questions[3].a[3].isCorrect;
+op2.value = Questions[0].a[1].isCorrect;
+op3.value = Questions[0].a[2].isCorrect;
+op4.value = Questions[0].a[3].isCorrect;
 
-start.addEventListener("click",function(){
-    var selected = "";
+var selected = "";
+var secondsLeft = 60;
+var questionNum = 0;
+
+
+function timer() {
+    var timer = setInterval(function(){
+        document.getElementById('timer').innerHTML='00:'+secondsLeft;
+        secondsLeft--
+        if (secondsLeft < 0) {
+            clearInterval(timer);
+        }
+    }, 1000);
+}
+
+start.addEventListener("click",function() {
     var questionContainer = document.querySelector(".question-container")
     var optionContainer = document.querySelector(".option-container")
-    questionContainer.setAttribute("style", "display: flex") //include timer within event listener
-    optionContainer.setAttribute("style", "display: flex")})
+    questionContainer.setAttribute("style", "display: flex") 
+    optionContainer.setAttribute("style", "display: flex")
+    start.setAttribute("style", "display: none")
+    timer()
+    Quiz()
+})
+var question = document.getElementById("question");
 
-const question = document.getElementById("question");
 
-question.innerText = Questions[0].q;
 
-op1.addEventListener("click", () => {
+function Quiz() {
+        var currentQues = Questions[0].q
+        question.innerText = currentQues
+
+
+op1.addEventListener("click", function() {
    selected = op1.value;
-})
-op2.addEventListener("click", () => { 
-    selected = op2.value;
-})
-op3.addEventListener("click", () => {    
-    selected = op3.value;
-})
-op4.addEventListener("click", () => {
-    selected = op4.value;
+   if (selected == true) {
+    currentQues++   
+       }
+   else if (selected == false) {
+    currentQues++
+    secondsLeft = secondsLeft-15
+
+   }
 })
 
-// const evaluate = document.getElementsByClassName("evaluate");
-// evaluate[0].addEventListener("click", () => {
-//     if (selected == "true") {
-//         result[0].innerHTML = "True";
-//         result[0].style.color = "green";
-//     } else {
-//         result[0].innerHTML = "False";
-//         result[0].style.color = "red";
-//     }
-// })
+op2.addEventListener("click", function() { 
+    // console.log("hello")
+    selected = op2.value;
+    if (selected === true) {
+        questionNum++
+        console.log("hello")
+       }
+    if (selected === false) {
+        questionNum++
+        secondsLeft = secondsLeft-15
+       }
+})
+op3.addEventListener("click", function() {   
+    // console.log("hello") 
+    selected = op3.value;
+    if (selected === true) {
+        console.log("hello")
+        questionNum++
+       }
+    if (selected === false) {
+        console.log("hello")
+        questionNum++
+        secondsLeft = secondsLeft-15
+       }
+})
+op4.addEventListener("click", function() {
+    // console.log("hello")
+    selected = op4.value;
+    if (selected === true) {
+        questionNum++
+       }
+    if (selected === false) {
+        questionNum++
+        secondsLeft = secondsLeft-15
+       }
+})
+}
