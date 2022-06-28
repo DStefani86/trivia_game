@@ -1,3 +1,4 @@
+//grabbing my elements
 var startButton = document.getElementById('start');
 var op1 = document.getElementById('op1');
 var op2 = document.getElementById('op2');
@@ -5,8 +6,9 @@ var op3 = document.getElementById('op3');
 var op4 = document.getElementById('op4');
 var question = document.getElementById("question-text");
 var choices = document.querySelector(".option-container")
+//creating a value for the timer
 var secondsLeft = 60;
-var questionNum = 0
+//creating an array for all my questions and answers
 var myQuestions = [ {
     q: "What are the main differences between let and const?",
     a1: "let cannot be reassigned, const can be reassigned", 
@@ -50,18 +52,7 @@ var myQuestions = [ {
     answer: "slice()",   
 }
 ]
-
-function timer() {
-    var timer = setInterval(function() {
-        secondsLeft--
-        document.getElementById("timer").innerHTML='00:'+secondsLeft;
-        if (secondsLeft === 0 || myQuestions.length ===  0) {
-            clearInterval(timer);
-            quizOver()
-        }
-    }, 1000);
-}
-
+//assigning attributes and functions to the start button to make the quiz visible and start the timers
 startButton.addEventListener("click",function() {
     var questionContainer = document.querySelector(".question-container")
     var optionContainer = document.querySelector(".option-container")
@@ -72,7 +63,19 @@ startButton.addEventListener("click",function() {
     showQuiz()
 })
 
+//creating a timer function that responds to the quiz answers and end the quiz
+function timer() {
+    var timer = setInterval(function() {
+        secondsLeft--
+        document.getElementById("timer").innerHTML='00:'+secondsLeft;
+        if (secondsLeft === 0 || myQuestions.length ===  0) {
+            clearInterval(timer);
+            quizOver();
+        }
+    }, 1000);
+}
 
+//creating a math expression to cycle to cycle through the questions and answers
 function showQuiz() {
     currentQuestion = Math.floor(Math.random() * myQuestions.length)
     
@@ -83,7 +86,7 @@ function showQuiz() {
         op4.innerHTML = myQuestions[currentQuestion].a4;
        
 }
-
+//creating an event listener to listen for a click within the container to the button matching the answer
 choices.addEventListener("click", function(apples) {
     var selected = apples.target
     var userChoice = apples.target.innerHTML
@@ -103,8 +106,8 @@ choices.addEventListener("click", function(apples) {
 function quizOver () {
     var playerInitials = prompt ("You made the leaderboard!! Enter your initails")
     var player = {
-        initials : playerInitials
-         : playerInitials + secondsLeft
+        initials : playerInitials,
+        score : secondsLeft,
     }
 localStorage.setItem("score", JSON.stringify(player));
 window.location.reload
