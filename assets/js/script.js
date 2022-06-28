@@ -57,7 +57,6 @@ op4.value = Questions[0].a[3].isCorrect;
 
 var selected = "";
 var secondsLeft = 60;
-var questionNum = 0;
 
 
 function timer() {
@@ -77,15 +76,17 @@ start.addEventListener("click",function() {
     optionContainer.setAttribute("style", "display: flex")
     start.setAttribute("style", "display: none")
     timer()
-    Quiz()
+    // quiz()
 })
 var question = document.getElementById("question");
 
 
 
-function Quiz() {
+function quiz() {
+    for (let i=0; i = Questions[0].q; i++) {
         var currentQues = Questions[0].q
         question.innerText = currentQues
+    } }
 
 
 op1.addEventListener("click", function() {
