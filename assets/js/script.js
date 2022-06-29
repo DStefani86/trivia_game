@@ -80,7 +80,7 @@ function timer() {
   }, 1000);
 }
 
-//creating a math expression to cycle to cycle through the questions array
+//creating a math expression to cycle through the array of questions
 function showQuiz() {
   currentQuestion = Math.floor(Math.random() * myQuestions.length);
   question.innerHTML = myQuestions[currentQuestion].q;
@@ -89,7 +89,7 @@ function showQuiz() {
   op3.innerHTML = myQuestions[currentQuestion].a3;
   op4.innerHTML = myQuestions[currentQuestion].a4;
 }
-//creating an event listener to listen for a click within the container to the button matching the answer
+//an event listening for a click within the container to the button matching the answer
 choices.addEventListener("click", function (apples) {
   var selected = apples.target;
   var userChoice = apples.target.innerHTML;
