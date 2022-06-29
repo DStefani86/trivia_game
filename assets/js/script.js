@@ -72,6 +72,8 @@ function timer() {
     secondsLeft--;
     document.getElementById("timer").innerHTML = "00:" + secondsLeft;
     if (secondsLeft === 0 || myQuestions.length === 0) {
+      //   questionContainer.setAttribute("style", "display:none");
+      //   optionContainer.setAttribute("style", "display:none");
       clearInterval(timer);
       quizOver();
     }
@@ -104,12 +106,11 @@ choices.addEventListener("click", function (apples) {
 });
 
 function quizOver() {
-  //
   var playerName = prompt("You made the leaderboard!! Enter your name:");
-  questionContainer.setAttribute("style", "display:none");
-  //   //   optionContainer.setAttribute("style", "display:none");
-  //   //   scoreBoard.setAttribute("style", "display: block");
-  //   //   scoreList.setAttribute("style", "display: block");
+
+  scoreBoard.setAttribute("style", "display: block");
+  scoreList.setAttribute("style", "display: block");
+
   var data = JSON.parse(localStorage.getItem("score")) || [];
   var playerScore = {
     name: playerName,
@@ -118,8 +119,8 @@ function quizOver() {
   data.push(playerScore);
   localStorage.setItem("score", JSON.stringify(data));
   for (let i = 0; i < data.length; i++) {
-    document.createElement("<li>");
-    Text.li = data[i].value;
+    var li = document.createElement("li");
+    li.innerHTML = data[i].name + ": " + data[i].score;
     console.log(data);
     scoreList.appendChild(li);
   }

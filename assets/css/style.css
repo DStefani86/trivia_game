@@ -65,14 +65,12 @@ header {
   display: block;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  text-align: left;
   padding: 10px;
-  align-items: left;
+  align-items: center;
   width: 400px;
-  height: 400px;
   height: fit-content;
   background-color: #eacaf3;
-  font-size: xx-large;
+  font-size: x-large;
   text-align: center;
   z-index: 1;
 }
