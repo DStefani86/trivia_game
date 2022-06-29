@@ -103,20 +103,20 @@ choices.addEventListener("click", function (apples) {
 });
 //creating a function to end the game and prompting the user
 function quizOver() {
-  scoreBoard.setAttribute("style", "display:flex");
   var playerName = prompt("You made the leaderboard!! Enter your name:");
+  //   questionContainer.setAttribute("style", "display: hidden");
+  //   optionContainer.setAttribute("style", "display: hidden");
+  //   scoreBoard.setAttribute("style", "display:flex");
+
   var playerScore = {
     name: playerName,
     score: secondsLeft,
   };
-  localStorage.setItem("score", JSON.stringify(["playerScore"]));
-  var finalScore = JSON.parse(localStorage.getItem"player")
+  localStorage.setItem("score", JSON.stringify(playerScore));
   var data = JSON.parse(localStorage.getItem("score"));
-  questionContainer.setAttribute("style", "display: hidden");
-  optionContainer.setAttribute("style", "display: hidden");
   for (let i = 0; i < data.length; i++) {
-    var newItem = document.createElement("li");
+    console.log(data);
+
     scoreList.appendChild([0]);
-    // ol.textContent = data;
   }
 }
