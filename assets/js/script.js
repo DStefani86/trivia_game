@@ -61,6 +61,7 @@ startButton.addEventListener("click", function () {
   optionContainer.setAttribute("style", "display: flex");
   start.setAttribute("style", "display: none");
   scoreBoard.setAttribute("style", "display: none");
+  scoreList.setAttribute("style", "display: none");
   timer();
   showQuiz();
 });
@@ -101,22 +102,25 @@ choices.addEventListener("click", function (apples) {
     }
   }
 });
-//creating a function to end the game and prompting the user
-function quizOver() {
-  var playerName = prompt("You made the leaderboard!! Enter your name:");
-  //   questionContainer.setAttribute("style", "display: hidden");
-  //   optionContainer.setAttribute("style", "display: hidden");
-  //   scoreBoard.setAttribute("style", "display:flex");
 
+function quizOver() {
+  //
+  var playerName = prompt("You made the leaderboard!! Enter your name:");
+  questionContainer.setAttribute("style", "display:none");
+  //   //   optionContainer.setAttribute("style", "display:none");
+  //   //   scoreBoard.setAttribute("style", "display: block");
+  //   //   scoreList.setAttribute("style", "display: block");
+  var data = JSON.parse(localStorage.getItem("score")) || [];
   var playerScore = {
     name: playerName,
     score: secondsLeft,
   };
-  localStorage.setItem("score", JSON.stringify(playerScore));
-  var data = JSON.parse(localStorage.getItem("score"));
+  data.push(playerScore);
+  localStorage.setItem("score", JSON.stringify(data));
   for (let i = 0; i < data.length; i++) {
+    document.createElement("<li>");
+    Text.li = data[i].value;
     console.log(data);
-
-    scoreList.appendChild([0]);
+    scoreList.appendChild(li);
   }
 }

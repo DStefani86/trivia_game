@@ -39,6 +39,7 @@ header {
   height: fit-content;
   background-color: #eacaf3;
 }
+
 .option {
   padding: 20px;
   width: 15vw;
@@ -60,15 +61,18 @@ header {
 
 #highscores {
   margin: 10px;
-  display: flex;
+  float: left;
+  display: block;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  text-align: center;
+  text-align: left;
   padding: 10px;
-  align-items: center;
-  width: 70%;
+  align-items: left;
+  width: 400px;
+  height: 400px;
   height: fit-content;
   background-color: #eacaf3;
   font-size: xx-large;
   text-align: center;
+  z-index: 1;
 }
